@@ -3,6 +3,8 @@ package nju.androidchat.client.component;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,6 +12,10 @@ import android.widget.TextView;
 
 import androidx.annotation.StyleableRes;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.UUID;
 
 import lombok.Setter;
@@ -24,7 +30,7 @@ public class ItemTextSend extends LinearLayout implements View.OnLongClickListen
     private UUID messageId;
     @Setter private OnRecallMessageRequested onRecallMessageRequested;
 
-    public ItemTextSend(Context context, String text, UUID messageId, OnRecallMessageRequested onRecallMessageRequested) {
+    public ItemTextSend(Context context, CharSequence charSequence, UUID messageId, OnRecallMessageRequested onRecallMessageRequested) {
         super(context);
         this.context = context;
         inflate(context, R.layout.item_text_send, this);
@@ -33,15 +39,15 @@ public class ItemTextSend extends LinearLayout implements View.OnLongClickListen
         this.onRecallMessageRequested = onRecallMessageRequested;
 
         this.setOnLongClickListener(this);
-        setText(text);
+        setText(charSequence);
     }
 
     public String getText() {
         return textView.getText().toString();
     }
 
-    public void setText(String text) {
-        textView.setText(text);
+    public void setText(CharSequence text) {
+            textView.setText(text);
     }
 
     @Override
@@ -59,8 +65,5 @@ public class ItemTextSend extends LinearLayout implements View.OnLongClickListen
                 .show();
 
         return true;
-
-
     }
-
 }

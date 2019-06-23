@@ -23,7 +23,7 @@ public class Hw1TalkModel implements MessageListener, Hw1Contract.Model {
     private SocketClient client;
 
     @Setter
-    private Hw1Contract.Presenter iMvp0TalkPresenter;
+    private Hw1Contract.Presenter iHw1TalkPresenter;
 
     public Hw1TalkModel() {
         this.client = SocketClient.getClient();
@@ -57,7 +57,7 @@ public class Hw1TalkModel implements MessageListener, Hw1Contract.Model {
                     serverSendMessage.getSenderUsername(),
                     serverSendMessage.getMessage()
             ));
-            iMvp0TalkPresenter.receiveMessage(new ClientMessage(serverSendMessage));
+            iHw1TalkPresenter.receiveMessage(new ClientMessage(serverSendMessage));
         } else if (message instanceof ErrorMessage) {
             // 接收到服务器的错误消息
             log.severe("Server error: " + ((ErrorMessage) message).getErrorMessage());
